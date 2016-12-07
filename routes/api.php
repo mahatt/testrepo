@@ -40,7 +40,7 @@ Route::post('customer','CustomerController@store');
 
 
 Route::post('loyalty', 'LoyaltyTransactionController@transfer');
-Route::post('claim' , 'LoyaltyTransactionController@claim')
+Route::post('claim' , 'LoyaltyTransactionController@claim');
 
 
 });
