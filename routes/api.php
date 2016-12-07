@@ -31,9 +31,16 @@ Route::post('merchant/addpoints','MerchantController@addpoints');
 Route::post('merchant/subpoints','MerchantController@subpoints');
 
 Route::post('offer/new','MerchantOfferController@store');
+
 Route::get('offer','MerchantOfferController@getByPhoneNumber');
 Route::delete('offer','MerchantOfferController@remove');
 
+Route::get('customer','CustomerController@getByPhoneNumber');
+Route::post('customer','CustomerController@store');
+
+
+Route::post('loyalty', 'LoyaltyTransactionController@transfer');
+Route::post('claim' , 'LoyaltyTransactionController@claim')
 
 
 });

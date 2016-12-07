@@ -52,7 +52,7 @@ class MerchantController extends Controller
     		return  response() -> json([
     				"error" => array(
     						"code" => "404",
-    						"message" => "Not Found !"
+    						"message" => "Not Found ! Invalid Inputs"
     					)
     			]);
     	}	
@@ -67,7 +67,7 @@ class MerchantController extends Controller
     		]);	
 
     	// NO need to check for object , we just inserted this
-    	return  DB::table('merchants')->where('merchant_phone_number',$request->phone_number)->get();
+    	return  $request->phone_number;
     }
 
 
@@ -165,14 +165,14 @@ class MerchantController extends Controller
 	    		]);
     	}   
 
-    	if($merchantinfo->merchant_points > $points )
+    	if($merchantinfo->merchant_points - $points > 0 )
 	    	$final_points = $merchantinfo->merchant_points - $points ;
 	    else
 	    {
 	    	return  response()->json([
 	    			"error" => array(
 	    			 	"code" => "403",
-	    			 	"message"=> "Negative Ops are Forbidden!"
+	    			 	"message"=> "Negative balance are Forbidden!"
 	    			 )
 	    		]);	    	
 	    }	
