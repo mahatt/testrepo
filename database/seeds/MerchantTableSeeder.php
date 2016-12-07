@@ -18,7 +18,8 @@ class MerchantTableSeeder extends Seeder
         	'merchant_name' => 'mahesh',
         	'merchant_emailid'  => 'mahesh@gmail.com',
         	'merchant_points'  => '0',
-        	'merchant_enable'  => '1'   // enable by default
+        	'merchant_enable'  => '1' ,  // enable by default
+            'merchant_password' => '0'
         	]);
     }
 }

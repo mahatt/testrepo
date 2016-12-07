@@ -20,12 +20,6 @@ Route::get('/', function () {
 
 // RESOURCE FU ROUTES
 
-Route::group(['prefix'=>'btype'],function(){
-
-Route::get('merchant','MerchantController@index');
-Route::get('merchant/{phoneNumber}','MerchantController@getByPhoneNumber');
-
-});
 
 
 

@@ -20,6 +20,7 @@ class CreateMerchantsTable extends Migration
             $table->string('merchant_emailid');
             $table->integer('merchant_points');
             $table->integer('merchant_enable');
+            $table->string('merchant_password');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateMerchantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Merchants');
+        Schema::dropIfExists('merchants');
     }
 }

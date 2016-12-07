@@ -16,3 +16,24 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+
+Route::group(['prefix'=>'btype'],function(){
+
+//Route::get('merchant','MerchantController@index');
+
+Route::get('merchant/{phoneNumber}','MerchantController@getByPhoneNumber');
+Route::post('merchant','MerchantController@store');
+Route::delete('merchant','MerchantController@remove');
+
+Route::post('merchant/addpoints','MerchantController@addpoints');
+Route::post('merchant/subpoints','MerchantController@subpoints');
+
+Route::post('offer/new','MerchantOfferController@store');
+Route::get('offer','MerchantOfferController@getByPhoneNumber');
+Route::delete('offer','MerchantOfferController@remove');
+
+
+
+});
