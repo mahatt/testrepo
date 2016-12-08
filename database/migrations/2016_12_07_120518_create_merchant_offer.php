@@ -17,8 +17,10 @@ class CreateMerchantOffer extends Migration
             $table->increments('id')->unique();
             $table->string('merchant_phone_number')->index();
             $table->string('merchant_offer_title');
-            $table->string('merchant_offer_description');        
+            $table->string('merchant_offer_description');
+            $table->timestamp('expires_at');        
             $table->timestamps();
+
         });
     }
 

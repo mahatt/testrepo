@@ -17,9 +17,10 @@ class CreateMerchantsTable extends Migration
             $table->increments('merchant_id');
             $table->string('merchant_phone_number')->index();
             $table->string('merchant_name');
-            $table->string('merchant_emailid');
+            $table->string('merchant_pincode');
             $table->integer('merchant_points');
             $table->integer('merchant_enable');
+            $table->string('merchant_category');
             $table->string('merchant_password');
         });
     }

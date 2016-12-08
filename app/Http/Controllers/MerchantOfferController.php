@@ -142,5 +142,88 @@ class MerchantOfferController extends Controller
     }
 
 
+    public function getByPincode(Request $request){
+        $pincode = $request->pincode;
+        $step  = $request->step;
+        $offset = $request->offset;
+
+        if(empty(trim($pincode)))
+        {
+            return  response()->json([
+                    "error" => array(
+                        "code" => "404",
+                        "message"=> "Not Found! Imcomplete Details for Offer"
+                     )
+                ]);                         
+        }  
+
+        if(empty(trim($step)))
+        {
+            $step = 10;
+        }
+
+        if(empty(trim($step)))
+        {
+            $offset = 0;
+        }
+
+
+        // TODO:  Add pattern for  pincode to cvoer more areas
+        // pincode equality is optimistic    
+        $offers = DB::table('merchant_offers')
+                  ->join('merchants','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+                  ->select('merchant_offers.*')
+                  ->where('merchants.merchant_pincode',$pincode)
+                  ->offset($offset)
+                  ->limit($step)
+                  ->get();
+
+        return json_encode($offers);        
+
+    }
+
+    public function getByCategory(Request $request){
+        $pincode = $request->pincode;
+        $category = $request->category;
+        $step  = $request->step;
+        $offset = $request->offset;
+
+        if(empty(trim($pincode)) ||
+            empty(trim($category)))
+        {
+            return  response()->json([
+                    "error" => array(
+                        "code" => "404",
+                        "message"=> "Not Found! Imcomplete Details for Offer"
+                     )
+                ]);                         
+        }  
+
+        if(empty(trim($step)))
+        {
+            $step = 10;
+        }
+
+        if(empty(trim($step)))
+        {
+            $offset = 0;
+        }
+
+
+        // TODO:  Add pattern for  pincode to cvoer more areas
+        // pincode equality is optimistic    
+        $offers = DB::table('merchant_offers')
+                  ->join('merchants','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+                  ->select('merchant_offers.*')
+                  ->where([['merchants.merchant_pincode',$pincode],
+                           ['merchants.merchant_category',$category]])
+                  ->offset($offset)
+                  ->limit($step)
+                  ->get();
+
+        return json_encode($offers);        
+
+    }
 
 }
+

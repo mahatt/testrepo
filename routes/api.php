@@ -39,6 +39,9 @@ Route::post('offer/new','MerchantOfferController@store');
 Route::get('offer','MerchantOfferController@getByPhoneNumber');
 Route::delete('offer','MerchantOfferController@remove');
 
+
+Route::get('offer/pincode','MerchantOfferController@getByPincode');
+Route::get('offer/category','MerchantOfferController@getByCategory');
 Route::get('customer','CustomerController@getByPhoneNumber');
 Route::post('customer','CustomerController@store');
 
