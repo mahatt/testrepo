@@ -86,4 +86,29 @@ class CustomerController extends Controller
 
     }
 
+
+    public function authenticate(Request $request)
+    {
+        $phone_number = $request->phone_number;
+        $password = $request->password;
+
+        $customerInfo =  DB::table('customers')
+                            ->where([['customer_phone_number','=',$phone_number],
+                                    ['customer_password','=',$password]])->first(); 
+
+
+        if(empty($customerInfo))
+        {
+            return  response()->json([
+                    "error" => array(
+                        "code" => "404",
+                        "message"=> "Not Found!"
+                     )
+                ]);
+        }   
+
+        return $phone_number;
+    }
+
+
 }

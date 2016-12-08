@@ -196,4 +196,30 @@ class MerchantController extends Controller
     }
 
 
+
+
+    public function authenticate(Request $request)
+    {
+    	$phone_number = $request->phone_number;
+    	$password = $request->password;
+
+    	$merchantinfo =  DB::table('merchants')
+    						->where([['merchant_phone_number','=',$phone_number],
+    								['merchant_password','=',$password]])->first();	
+
+
+    	if(empty($merchantinfo))
+    	{
+	    	return  response()->json([
+	    			"error" => array(
+	    			 	"code" => "404",
+	    			 	"message"=> "Not Found!"
+	    			 )
+	    		]);
+    	}   
+
+    	return $phone_number;
+    }
+
+
 }

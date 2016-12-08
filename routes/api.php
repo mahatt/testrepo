@@ -23,9 +23,13 @@ Route::group(['prefix'=>'btype'],function(){
 
 //Route::get('merchant','MerchantController@index');
 
+Route::post('auth/merchant','MerchantController@authenticate');
+Route::post('auth/customer','CustomerController@authenticate');
+
 Route::get('merchant/{phoneNumber}','MerchantController@getByPhoneNumber');
 Route::post('merchant','MerchantController@store');
 Route::delete('merchant','MerchantController@remove');
+
 
 Route::post('merchant/addpoints','MerchantController@addpoints');
 Route::post('merchant/subpoints','MerchantController@subpoints');
