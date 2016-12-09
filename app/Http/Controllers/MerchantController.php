@@ -32,7 +32,8 @@ class MerchantController extends Controller
 
     	return  response()->json([
     		 "name" => $merchantinfo->merchant_name,
-    		 "emailid" => $merchantinfo->merchant_emailid,
+    		 "pincode" => $merchantinfo->merchant_pincode,
+    		 "category" => $merchantinfo->merchant_category,
     		 "phone_number" => $merchantinfo->merchant_phone_number,
     		 "enabled" => $merchantinfo->merchant_enable,
     		 "points" => $merchantinfo->merchant_points
