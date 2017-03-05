@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/web/messages','MerchantMessagesViewController@listAll');
+Route::get('/web/merchants','MerchantViewController@listAll');
+Route::get('/web/customers','CustomerViewController@listAll');
+Route::get('/web/transactions','TransactionViewController@listAll');
 
 
 // RESOURCE FU ROUTES

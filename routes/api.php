@@ -33,6 +33,7 @@ Route::delete('merchant','MerchantController@remove');
 
 Route::post('merchant/addpoints','MerchantController@addpoints');
 Route::post('merchant/subpoints','MerchantController@subpoints');
+Route::post('merchant/transact','MerchantController@transact');
 
 Route::post('offer/new','MerchantOfferController@store');
 
@@ -49,5 +50,24 @@ Route::post('customer','CustomerController@store');
 Route::post('loyalty', 'LoyaltyTransactionController@transfer');
 Route::post('claim' , 'LoyaltyTransactionController@claim');
 
+
+Route::post('merchant/message','MerchantMessagesController@store');
+});
+
+
+/*
+    This API is designed for SHOPPITRON only.
+
+*/
+Route::group(['prefix'=>'ctype/v1'],function(){
+
+Route::post('auth','CustomerController@authenticate');
+Route::post('customer','CustomerController@store');
+Route::get('customer','CustomerController@getByPhoneNumber');
+Route::post('customer/location','CustomerController@location');
+
+Route::post('offer/issue','MerchantOfferController@issue');
+Route::get('offer/location','MerchantOfferController@getByPincode');
+Route::get('offer/category','MerchantOfferController@getByCategory');
 
 });

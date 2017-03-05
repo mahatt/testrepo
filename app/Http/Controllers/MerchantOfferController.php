@@ -6,6 +6,8 @@ use DB;
 use DateTime;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class MerchantOfferController extends Controller
 {
     //
@@ -67,7 +69,7 @@ class MerchantOfferController extends Controller
     	$offer_text =  $request->offer_text;
     	$offer_title =  $request->offer_title;
     	$phone_number = $request->phone_number;
-
+        $expires_at   = $request->expires_at;
 
     	//check if either of them is empty return error
 
@@ -101,17 +103,19 @@ class MerchantOfferController extends Controller
     
     	//insert into table 
 
+        $expiry_date = Carbon::createFromFormat('Y-m-d',$expires_at);
 
         $offerid = DB::table('merchant_offers')->insertGetId([
                     'merchant_phone_number' => $phone_number,
                 	'merchant_offer_title' => $offer_title,
                 	'merchant_offer_description' =>  $offer_text,
                 	'created_at' =>  new DateTime,
+                    'expires_at' =>  $expiry_date,                    
                 	'updated_at' =>  new DateTime
                 	]);
 
 
-       return DB::table('merchant_offers')->where('id',$offerid)->first();
+       return $offerid;
     }
 
 
@@ -224,6 +228,35 @@ class MerchantOfferController extends Controller
         return json_encode($offers);        
 
     }
+
+
+	public function issue(Request $request){
+		$phone_number = $request->phone_number;
+		if( empty(trim($phone_number))){
+	    	return  response()->json([
+	    			"error" => array(
+	    			 	"code" => "402",
+	    			 	"message"=> "Invalid Fields for Code!!"
+	    			 )
+	    		]);				
+		}
+
+		$otp_length =  6;
+		$characters = '123456789';
+		$otp  =  '';
+
+		for($count = 0 ; $count < $otp_length;  $count++){
+			$otp .= $characters[rand(0,8)];
+		}
+
+		DB::table('OnetimePasswords')->insertGetId([
+			'phone_number' => $phone_number,
+			'code' => $otp,
+			'used'  => 0,
+			'created_at' => new DateTime
+		]);
+		return  $otp;
+	}
 
 }
 

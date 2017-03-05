@@ -21,7 +21,7 @@ class CustomerController extends Controller
     			]);    		
     	}
 
-    	$customerInfo = DB::table('customers')->where('customer_phone_number',$phoneNumber)->first();
+    	$customerInfo = DB::table('customers')->where('customer_phone_number',$phone_number)->first();
  
     	if(empty($customerInfo))
     	{
@@ -46,12 +46,12 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
     	$phone_number = $request->phone_number;
-    	$name 		  = $request->name;
+    	$name 		  = "default"; //= $request->name;
     	$pincode 	  = $request->pincode;
     	$password	  = $request->password;
 
     	if(empty(trim($phone_number)) ||
-    	   empty(trim($name)) 		  ||
+    	   //empty(trim($name)) 		  ||
     	   empty(trim($pincode))	  ||
     	   empty(trim($password)))
     	{
@@ -109,6 +109,7 @@ class CustomerController extends Controller
 
         return $phone_number;
     }
+
 
 
 }

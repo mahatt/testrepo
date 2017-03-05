@@ -20,7 +20,7 @@ class MerchantTableSeeder extends Seeder
         	'merchant_points'  => '0',
         	'merchant_enable'  => '1' ,  // enable by default
             'merchant_category' => 'dining',
-            'merchant_password' => '0'
+            'merchant_password' => '111'
         	]);
     }
 }
