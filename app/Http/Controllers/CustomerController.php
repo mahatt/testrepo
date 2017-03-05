@@ -63,10 +63,21 @@ class CustomerController extends Controller
     			]);    				
     	}
 
-
+		$customerInfo  = DB::table('customers')
+						 ->where('customer_phone_number',$phone_number)
+						 ->first();
+		if(!empty($customerInfo))
+		{
+            return  response()->json([
+                    "error" => array(
+                        "code" => "402",
+                        "message"=> "User Already Exists!"
+                     )
+                ]);			
+		}				 
     	$customerId = DB::table('customers')->insertGetId([
                 	'customer_phone_number' => $request->phone_number,
-                	'customer_name' => $request->name,
+                	'customer_name' => $name,
                 	'customer_pincode' => $request->pincode,
                 	'customer_password' =>  $request->password,
                 	'customer_points' => 0
@@ -82,7 +93,7 @@ class CustomerController extends Controller
     			]);    	 	
     	 }	
 
-         return $customerId;       	   	
+         return $phone_number;       	   	
 
     }
 

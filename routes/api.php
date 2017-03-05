@@ -69,5 +69,6 @@ Route::post('customer/location','CustomerController@location');
 Route::post('offer/issue','MerchantOfferController@issue');
 Route::get('offer/location','MerchantOfferController@getByPincode');
 Route::get('offer/category','MerchantOfferController@getByCategory');
+Route::get('offer/count/category','MerchantOfferController@getCountOfCategory');
 
 });

@@ -258,5 +258,32 @@ class MerchantOfferController extends Controller
 		return  $otp;
 	}
 
+	public function getCountOfCategory(Request $request){
+
+	$foodCount= DB::table('merchants')
+				->join('merchant_offers','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+				->where('merchants.merchant_category','=','food')
+				->count();
+	$groceryCount = DB::table('merchants')
+				->join('merchant_offers','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+				->where('merchants.merchant_category','=','grocery')
+				->count();
+	$electronicsCount = DB::table('merchants')
+				->join('merchant_offers','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+				->where('merchants.merchant_category','=','electronics')
+				->count();
+	$generalCount= DB::table('merchants')
+				->join('merchant_offers','merchants.merchant_phone_number','=','merchant_offers.merchant_phone_number')
+				->where('merchants.merchant_category','=','general')
+				->count();												
+
+	return  response()->json([
+		"food_count" => $foodCount,
+		"grocery_count"  => $groceryCount,
+		"electronics_count" => $electronicsCount,
+		"general_count" => $generalCount 
+	]);			
+	}	
+
 }
 
